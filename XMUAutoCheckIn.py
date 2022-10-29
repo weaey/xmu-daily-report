@@ -111,7 +111,7 @@ def checkin(cfg: Config, use_vpn=True) -> None:
             driver.switch_to.alert.dismiss()
     except Exception as e:
         fail("存在没有正确填写的部分，请向作者反馈", "打卡失败", cfg.email, e, shutdown=False, run_fail=True)
-    time.sleep(10)
+    time.sleep(1)
     logger.info("打卡成功")
     send_mail(f"账号【{cfg.username}】打卡成功", "打卡成功", cfg.email)
 
@@ -136,7 +136,7 @@ def main():
         for i in range(1, 2 if debug else 11):
             logger.info(f'第{i}次尝试')
             try:
-                checkin(cfg, True)
+                checkin(cfg, False)
                 success = True
                 break
             except Exception as e:
